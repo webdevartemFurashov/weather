@@ -1,0 +1,98 @@
+body {
+ margin:0px;
+ padding:0px;
+
+ font-family:Arial, sans-serif;
+ font-size:14px;
+ line-height: 18px;
+ color:#a0a0a0;
+
+ width:780px;
+ height:280px;
+
+ box-sizing: border-box;
+}
+
+.weather {
+ background-color:#f4f4f4;
+ border:solid 2px grey;
+ 
+ width:780px;
+ height:335px;
+ padding:5px 20px;
+
+ position:relative;
+}
+
+.weather h1 {
+ text-align:center;
+ color:#000000;
+}
+
+.weather button {
+ position:absolute;
+ top:160px;
+ 
+ border: none;
+ background-color:#f4f4f4;
+
+ font:inherit;
+ font-size:30px;
+ font-weight: bold;
+}
+
+.previous {
+ left:0px;
+}
+
+.next {
+ right:0px; 
+}
+
+.wraper {
+ width:755px;
+ height:240px;
+ margin:0 auto;
+
+ overflow: hidden;
+}
+
+.weather-list {
+ margin:0px;
+ margin-left:0px;
+ padding:0px;
+ 
+ width:1000000px;
+}
+
+.weather-item {
+ background-color: #ffffff;
+
+ display:inline-block;
+
+ width:180px;
+ height:235px;
+
+ margin-left:5px;
+ text-align:center;
+ list-style:none;
+
+ border:solid 2px grey; 	
+}
+
+.weather-item:first-child {
+ margin-left:0px;
+}
+
+.month-day,
+.weather-day{
+ font-size: 16px;
+ font-weight: bold;
+ line-height: 18px;
+ color: #000000;
+}
+
+.precipitation-icon {
+	width: 35px; 
+	height: 35px;
+}

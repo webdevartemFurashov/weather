@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Погода</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <section class="weather">
+      <h1>Погода</h1>
+      <button class="previous"> < </button>
+      <button class="next"> > </button>
+      <div class="wraper">
+        <ul class="weather-list">
+        </ul>
+      </div>
+    </section>
+  </body>
+  <script>
+
+var weatherData = [
+{
+date: 1538337600000,
+temperature: {
+ night: -3,
+ day: 2,
+  },
+cloudiness: 'Ясно',
+snow: false,
+rain: false,
+},
+{
+date: 1538424000000,
+temperature: {
+  night: 0,
+  day: 4,
+  },
+cloudiness: 'Облачно',
+snow: false,
+rain: true,
+},
+{
+date: 1538337600000,
+temperature: {
+ night: -3,
+ day: 2,
+  },
+cloudiness: 'Ясно',
+snow: false,
+rain: false,
+},
+{
+date: 1538337600000,
+temperature: {
+ night: -3,
+ day: 2,
+  },
+cloudiness: 'Ясно',
+snow: false,
+rain: false,
+},
+{
+date: 1538510400000,
+temperature: {
+  night: 0,
+  day: 1,
+    },
+cloudiness: 'Облачно',
+snow: true,
+rain: true,
+},
+{
+date: 1538424000000,
+temperature: {
+  night: 0,
+  day: 4,
+  },
+cloudiness: 'Облачно',
+snow: false,
+rain: true,
+},
+{
+date: 1538424000000,
+temperature: {
+  night: -3,
+  day: -1,
+  },
+cloudiness: 'Ясно',
+snow: false,
+rain: false,
+},
+];
+
+
+var makeElement = function(tagName, className, text){
+  var element = document.createElement(tagName);
+  element.classList.add(className);
+  if (text || text == 0) {
+    element.textContent = text;
+}
+ return element;
+};
+
+var makeListItem = function(parametr){
+  var weatherItem = makeElement('li', 'weather-item');
+  
+
+  var weekDay = makeElement('p', 'week-day', 'День недели');
+  weatherItem.appendChild(weekDay);
+
+  var monthDay = makeElement('p', 'month-day', parametr.date);
+  weatherItem.appendChild(monthDay);
+
+  var image = makeElement('img', 'precipitation-icon');
+  if(!parametr.rain && !parametr.snow && parametr.cloudiness == 'Облачно'){
+  image.src = 'img/cloudy.jpg';
+  image.alt = 'cloudy';
+  }
+  if(parametr.cloudiness == 'Ясно'){
+  image.src = 'img/suny.jpg';
+  image.alt = 'suny';
+  }
+  if(parametr.rain){
+  image.src = 'img/rainy.jpg';
+  image.alt = 'rainy';
+  }
+  if(parametr.rain && parametr.snow){
+  image.src = 'img/snowy.jpg';
+  image.alt = 'snowy';
+  }
+  weatherItem.appendChild(image);
+
+  var plus = "днём +";
+  if (parametr.temperature.day <= 0){plus = 'днём ';}; 
+  var weatherDay = makeElement('p', 'weather-day', plus + parametr.temperature.day);
+  weatherItem.appendChild(weatherDay);
+  var gradDay = document.createElement('sup');
+  gradDay.textContent = 'o';
+  weatherDay.appendChild(gradDay);
+
+  var weatherNight = makeElement('p', 'weather-night', 'ночью ' + parametr.temperature.night);
+  weatherItem.appendChild(weatherNight);
+  var gradNight = document.createElement('sup');
+  gradNight.textContent = 'o';
+  weatherNight.appendChild(gradNight);
+
+  var value = 'Облачно';
+  if (parametr.cloudiness == 'Ясно'){value = 'Ясно';};
+  if (parametr.rain){value = 'Дождь';};
+  if (parametr.rain && parametr.snow){value = 'Снег с дождём';};
+  
+  console.log(value);
+  var precipitation = makeElement('p', 'precipitation', value);
+
+  weatherItem.appendChild(precipitation);
+
+  return weatherItem;
+};
+
+var list = document.querySelector('.weather-list');
+for (var i = 0; i < weatherData.length; i++) {
+  var item = makeListItem(weatherData[i]);
+  list.appendChild(item);  
+}
+
+var next = document.querySelector('.next');
+var prev = document.querySelector('.previous');
+var shift = 0;
+var width = 189;
+var listElements = list.querySelectorAll('li');
+
+next.addEventListener('click', function () {
+shift = Math.max(shift - width, -width * (listElements.length - 4));
+list.style.marginLeft = shift + 'px';
+console.log(shift);
+});
+
+prev.addEventListener('click', function () { 
+shift = Math.min(shift + width, 0);
+list.style.marginLeft = shift + 'px';
+console.log(shift);
+});
+
+  </script>
+</html>
